@@ -10,19 +10,6 @@ Caching: Utilizes Redis for caching frequently accessed data.
 Efficient Routing: Streamlined API routes for faster response times.
 TypeScript: Provides type safety and improved code quality.
 Testing: Comprehensive tests to ensure reliability and performance.
-Project Structure
-
-Sample_Project/
-├── controllers/         # API controllers
-├── models/              # Sequelize models
-├── routes/              # API routes
-├── tests/               # Test cases
-├── app.js               # Main application entry point
-├── database.sqlite      # SQLite database file
-├── node_modules/        # Node.js modules
-├── package.json         # Project metadata and dependencies
-├── package-lock.json    # Dependency lock file
-└── sequelize.js         # Sequelize initialization
 
 Getting Started
 Prerequisites
