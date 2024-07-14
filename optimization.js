@@ -6,7 +6,9 @@
 // typescript
 // Copy code
 // Before Optimization
-const users = await User.findAll({
+const express = require('express'); 
+
+users = await User.findAll({
   include: [
     {
       model: Profile,
@@ -18,12 +20,12 @@ const users = await User.findAll({
     }
   ]
 });
-After Optimization:
+// After Optimization:
 
-Adding indexes to frequently queried columns.
-Reducing the number of includes by breaking down the query into multiple efficient queries.
-typescript
-Copy code
+// Adding indexes to frequently queried columns.
+// Reducing the number of includes by breaking down the query into multiple efficient queries.
+// typescript
+// Copy code
 // Adding indexes (done in migration files)
 // Before running the application, add indexes to important columns
 await queryInterface.addIndex('Users', ['name']);
@@ -54,29 +56,29 @@ const orders = await Order.findAll({
     }
   ]
 });
-Example 2: Caching Frequently Accessed Data
-Before Optimization:
+// Example 2: Caching Frequently Accessed Data
+// Before Optimization:
 
-Each request fetches the same data from the database, leading to unnecessary database load and increased response time.
+// Each request fetches the same data from the database, leading to unnecessary database load and increased response time.
 
-typescript
-Copy code
+// typescript
+// Copy code
 // Before Optimization
-const getProducts = async (req: Request, res: Response) => {
+getProducts = async (req, res) => {
   const products = await Product.findAll();
   res.json(products);
 };
-After Optimization:
+// After Optimization:
 
-Using a caching layer (e.g., Redis) to store frequently accessed data.
+// Using a caching layer (e.g., Redis) to store frequently accessed data.
 
-typescript
-Copy code
+// typescript
+// Copy code
 import Redis from 'ioredis';
 
 const redis = new Redis();
 
-const getProducts = async (req: Request, res: Response) => {
+const getProducts = async (req, res) => {
   const cacheKey = 'products';
   const cachedProducts = await redis.get(cacheKey);
 
@@ -89,32 +91,32 @@ const getProducts = async (req: Request, res: Response) => {
 
   res.json(products);
 };
-Example 3: Improving API Route Efficiency
-Before Optimization:
+// Example 3: Improving API Route Efficiency
+// Before Optimization:
 
-API routes with redundant middleware or unnecessary processing steps.
+// API routes with redundant middleware or unnecessary processing steps.
 
-typescript
-Copy code
+// typescript
+// Copy code
 // Before Optimization
-app.get('/api/users/:id', verifyAuthToken, logRequestDetails, async (req: Request, res: Response) => {
+app.get('/api/users/:id', verifyAuthToken, logRequestDetails, async (req, res) => {
   const user = await User.findByPk(req.params.id);
   res.json(user);
 });
-After Optimization:
+// After Optimization:
 
-Removing unnecessary middleware and combining steps where possible.
+// Removing unnecessary middleware and combining steps where possible.
 
-typescript
-Copy code
+// typescript
+// Copy code
 // After Optimization
-app.get('/api/users/:id', async (req: Request, res: Response) => {
+app.get('/api/users/:id', async (req, res) => {
   const user = await User.findByPk(req.params.id);
   res.json(user);
 });
-Measurable Improvements
-Query Optimization: By optimizing queries and adding indexes, you might observe a 40% increase in query execution efficiency.
-Caching: Introducing caching for frequently accessed data can reduce response times by up to 50%.
-Route Efficiency: Streamlining routes and reducing middleware can lead to a 30% decrease in overall response times.
-By implementing these optimizations, you can substantiate the claim of improved scalability and efficiency, as reflected in the provided examples. To quantify these improvements, use tools like New Relic, Datadog, or pm2 to measure performance metrics before and after optimizations.
+// Measurable Improvements
+// Query Optimization: By optimizing queries and adding indexes, you might observe a 40% increase in query execution efficiency.
+// Caching: Introducing caching for frequently accessed data can reduce response times by up to 50%.
+// Route Efficiency: Streamlining routes and reducing middleware can lead to a 30% decrease in overall response times.
+// By implementing these optimizations, you can substantiate the claim of improved scalability and efficiency, as reflected in the provided examples. To quantify these improvements, use tools like New Relic, Datadog, or pm2 to measure performance metrics before and after optimizations.
 
