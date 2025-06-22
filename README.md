@@ -1,6 +1,6 @@
 - 👋 Hi, I’m Anshuman
 - 👀 I’m interested in backend developer roles (Node.js)
-- 🌱 I’m currently learning Mean stack
+- 🌱 I develop code in Mern stack
 - 💞️ I want to collaborate on AWS/AZURE cloud integration works.
 - 📫 Reach me at anshumanghosh410614@gmail.com
 
